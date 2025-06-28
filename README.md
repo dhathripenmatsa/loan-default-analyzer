@@ -16,15 +16,6 @@ This is a machine learning web application that predicts the probability of a lo
 
 ---
 
-## 📊 Sample Prediction
-
-> Enter details of an applicant like age, income, credit score, etc.  
-> The app returns a probability and classifies them as **High-risk** or **Low-risk**.
-
-![App Screenshot](https://i.imgur.com/Ow3RW7a.png)
-
----
-
 ## 🧠 How It Works
 
 1. Load and preprocess `Loan_default.csv`
@@ -37,24 +28,24 @@ This is a machine learning web application that predicts the probability of a lo
 ## 🗂 Folder Structure
 
 loan-default-risk/
-├── data/
-│ └── Loan_default.csv # training data
-├── train_model.py # model training script
-├── predict.py # manual prediction script
-├── app.py # Streamlit web app
-├── loan_default_model.pkl # saved ML model
-├── requirements.txt # dependency file
-└── README.md # you're reading it
+- ├── data/
+- │ └── Loan_default.csv # training data
+- ├── train_model.py # model training script
+- ├── predict.py # manual prediction script
+- ├── app.py # Streamlit web app
+- ├── loan_default_model.pkl # saved ML model
+- ├── requirements.txt # dependency file
+- └── README.md # you're reading it
 
 ---
 
 ## 📦 Tech Stack
 
-Python 3
-pandas
-scikit-learn
-joblib
-Streamlit
+- Python 3
+- pandas
+- scikit-learn
+- joblib
+- Streamlit
 
 ## 🙋‍♀️ Author
 Dhathri Penmatsa
