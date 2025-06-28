@@ -48,4 +48,4 @@ loan-default-risk/
 - Streamlit
 
 ## 🙋‍♀️ Author
-Dhathri Penmatsa
+dhathripenmatsa
