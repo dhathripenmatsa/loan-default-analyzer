@@ -1,51 +1,69 @@
-# 🏦 Loan Default Risk Analyzer
+# 💸 Loan Default Risk Analyzer
 
-This is a machine learning web application that predicts the probability of a loan applicant **defaulting**. It uses a **Gradient Boosting Classifier** trained on real-world financial attributes, and is deployed using **Streamlit**.
+A machine learning web app that predicts the probability of a loan applicant defaulting on their loan. Built with XGBoost, Streamlit, and real-world feature engineering, this project simulates how banks evaluate borrower risk.
 
-🔗 **Live Demo**: [Click here to try the app](https://dhathripenmatsa-loan-default-analyzer-app-u0ji4f.streamlit.app/)
-
----
-
-## 🚀 Features
-
-- 📊 Predicts **risk of default** based on financial & demographic inputs
-- 🧠 Uses **scikit-learn ML model** (Gradient Boosting Classifier)
-- 🌐 Built with **Streamlit** for fast, interactive web UI
-- 🔐 Inputs include: Credit Score, Income, Loan Amount, DTI Ratio, Employment Type, Co-Signer, etc.
-- 📝 Easily customizable & extendable (e.g. SHAP explanations, model retraining)
+🔗 **Live App**: [Loan Default Analyzer](https://dhathripenmatsa-loan-default-analyzer-app-u0ji4f.streamlit.app/)  
+📂 **Dataset**: Custom CSV-based dataset  
+💻 **Model**: XGBoost Classifier + Feature Engineering + SMOTE
 
 ---
 
-## 🧠 How It Works
+## 🧠 Features
 
-1. Load and preprocess `Loan_default.csv`
-2. Train a model and save it as `loan_default_model.pkl`
-3. Streamlit app loads the model and takes user input
-4. Input is preprocessed → prediction made → risk displayed
-
----
-
-## 🗂 Folder Structure
-
-loan-default-risk/
-- ├── data/
-- │ └── Loan_default.csv # training data
-- ├── train_model.py # model training script
-- ├── predict.py # manual prediction script
-- ├── app.py # Streamlit web app
-- ├── loan_default_model.pkl # saved ML model
-- ├── requirements.txt # dependency file
-- └── README.md # you're reading it
+- Predicts default risk (0–100%) based on financial & personal data
+- Custom feature engineering:
+  - Loan-to-Income Ratio
+  - Debt-to-Income Flag
+  - Senior Age Group Flag
+  - Short-Term Loan Indicator
+- Balanced training using SMOTE
+- Tuned XGBoost classifier with ROC-AUC cross-validation
+- Deployed via Streamlit Cloud
 
 ---
 
-## 📦 Tech Stack
+## 📁 Files in This Project
 
-- Python 3
-- pandas
-- scikit-learn
-- joblib
-- Streamlit
+| File                   | Description                               |
+|------------------------|-------------------------------------------|
+| `app.py`               | Streamlit UI for predictions              |
+| `train_model.py`       | ML model training + feature engineering   |
+| `encoder.pkl`          | Saved preprocessor (OneHotEncoder)        |
+| `loan_default_model.pkl` | Trained XGBoost model                  |
+| `requirements.txt`     | Dependencies and pinned sklearn version   |
+| `data/Loan_default.csv`| CSV dataset with borrower info            |
+| 'predict.py'
+---
 
-## 🙋‍♀️ Author
-dhathripenmatsa
+## 📊 Example Input & Output
+
+**Input:**
+- Age: 63
+- Income: ₹1,20,000
+- Loan: ₹200,000
+- Credit Score: 480
+- DTI Ratio: 0.95
+- Employment: Unemployed  
+...
+
+**Output:**
+> 🧾 Probability of Default: **87.3%**  
+> 🔴 High Risk – likely to default
+
+---
+
+## ✅ Tech Stack
+
+- **Python 3.10+**
+- **Scikit-learn 1.6.1**
+- **XGBoost**
+- **SMOTE (imbalanced-learn)**
+- **Streamlit** for web UI
+- **Joblib** for saving models
+- **GitHub + Streamlit Cloud** for deployment
+
+---
+
+## ✨ Author
+
+[dhathripenmatsa](https://github.com/dhathripenmatsa)
