@@ -1,34 +1,55 @@
+# predict.py
+
 import joblib
 import pandas as pd
 
-# 1. Load the saved pipeline (prep + model)
+# Load model and encoder
 model = joblib.load("loan_default_model.pkl")
+encoder = joblib.load("encoder.pkl")
 
-# 2. Enter a sample applicant (replace values as needed)
-sample = {
-    "Age": 32,
-    "Income": 55000,
-    "LoanAmount": 18000,
-    "CreditScore": 710,
-    "MonthsEmployed": 60,
-    "NumCreditLines": 4,
-    "InterestRate": 10.5,
-    "LoanTerm": 36,
-    "DTIRatio": 0.24,
-    "Education": "Bachelor's",
-    "EmploymentType": "Full-time",
-    "MaritalStatus": "Single",
-    "HasMortgage": "No",
-    "HasDependents": "No",
-    "LoanPurpose": "Car",
-    "HasCoSigner": "No"
+# Exact input with required columns and expected values
+input_dict = {
+    "Age": 70,
+    "Income": 100000,
+    "LoanAmount": 200000,
+    "CreditScore": 350,
+    "MonthsEmployed": 4,
+    "NumCreditLines": 2,
+    "InterestRate": 24.5,
+    "LoanTerm": 12,
+    "DTIRatio": 0.98,
+    "Education": "High School",               # Must match training categories
+    "EmploymentType": "Unemployed",
+    "MaritalStatus": "Married",
+    "HasMortgage": "Yes",
+    "HasDependents": "Yes",
+    "LoanPurpose": "Debt Consolidation",
+    "HasCoSigner": "No",
 }
 
-input_df = pd.DataFrame([sample])
+# predict.py  (only the engineered‑feature block changes)
 
-# 3. Predict
-prob_default = model.predict_proba(input_df)[0][1]
-label        = model.predict(input_df)[0]
+input_dict["Loan_to_Income_Ratio"] = input_dict["LoanAmount"] / (input_dict["Income"] + 1)
+input_dict["Employed"]             = 0 if input_dict["EmploymentType"] == "Unemployed" else 1
+input_dict["ShortLoanTerm"]        = int(input_dict["LoanTerm"] <= 12)   # <-- use this name
+input_dict["High_DTI"]             = int(input_dict["DTIRatio"] >= 0.45)
+input_dict["Senior"]               = int(input_dict["Age"] >= 60)
 
-print(f"Probability of default: {prob_default:.1%}")
-print("Prediction:", "❌ High‑risk borrower" if label else "✅ Low‑risk borrower")
+# Convert to DataFrame
+input_df = pd.DataFrame([input_dict])
+
+# Transform input using encoder
+X_encoded = encoder.transform(input_df)
+
+# Predict
+prob = model.predict_proba(X_encoded)[0][1]
+print(f"🧾 Probability of Default: {round(prob * 100, 2)}%")
+
+# Risk interpretation
+if prob >= 0.7:
+    print("🔴 High Risk – likely to default")
+elif prob >= 0.4:
+    print("🟠 Medium Risk – caution advised")
+else:
+    print("🟢 Low Risk – likely to repay")
+
