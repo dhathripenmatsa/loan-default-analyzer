@@ -2,7 +2,7 @@
 
 A machine learning web app that predicts the probability of a loan applicant defaulting on their loan. Built with XGBoost, Streamlit, and real-world feature engineering, this project simulates how banks evaluate borrower risk.
 
-🔗 **Live App**: [Loan Default Analyzer](https://dhathripenmatsa-loan-default-analyzer-app-u0ji4f.streamlit.app/)  
+🔗 **Demo**: [Loan Default Analyzer](https://dhathripenmatsa-loan-default-analyzer-app-u0ji4f.streamlit.app/)  
 📂 **Dataset**: Custom CSV-based dataset  
 💻 **Model**: XGBoost Classifier + Feature Engineering + SMOTE
 
@@ -22,17 +22,19 @@ A machine learning web app that predicts the probability of a loan applicant def
 
 ---
 
-## 📁 Files in This Project
+## 📁 Project Structure
 
-| File                   | Description                               |
-|------------------------|-------------------------------------------|
-| `app.py`               | Streamlit UI for predictions              |
-| `train_model.py`       | ML model training + feature engineering   |
-| `encoder.pkl`          | Saved preprocessor (OneHotEncoder)        |
-| `loan_default_model.pkl` | Trained XGBoost model                  |
-| `requirements.txt`     | Dependencies and pinned sklearn version   |
-| `data/Loan_default.csv`| CSV dataset with borrower info            |
-| 'predict.py'
+| File / Folder          | Description |
+|------------------------|-------------|
+| `data/Loan_default.csv`| CSV dataset with training data |
+| `app.py`               | Streamlit UI to input user details and predict risk |
+| `predict.py`           | Standalone script for making predictions (for testing or API use) |
+| `train_model.py`       | Training script for model and encoder with feature engineering |
+| `encoder.pkl`          | Saved OneHotEncoder from training pipeline |
+| `loan_default_model.pkl` | Trained XGBoost model |
+| `requirements.txt`     | All Python dependencies with version pins |
+| `README.md`            | You are reading it :) |
+
 ---
 
 ## 📊 Example Input & Output
